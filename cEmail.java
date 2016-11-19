@@ -5,11 +5,9 @@
  */
 package pkEmail;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Label;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -25,18 +23,29 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import pkg3340emaildemo.Main;
-
 
 /**
- *
+ * This class is for sending Emails (with attachments)from a UTRGV/Office360 account
+ * to any other Email address.
  * @author Heromachine
  */
+
 public class cEmail {
     
     private String smtpHost = "smtp.office365.com";
     private String port = "587";    
     
+    /**
+     * cEmail's Primary Overloaded Constructor
+     * @param to Recipient's Email address
+     * @param cc Carbon copy Email address
+     * @param from User's UTRGV Email address
+     * @param subject Subject line
+     * @param textMessage Email message body
+     * @param username User's UTRGV username/Email address
+     * @param password User's URTGV account password
+     * @param attachment Attachment file path and filename
+     */
     public cEmail(
             String to, 
             String cc, 
@@ -48,12 +57,25 @@ public class cEmail {
             String attachment
     )
     {
-      
         try{
         sendEmail(to, cc, from, subject, textMessage, smtpHost, username, password, attachment);
-        }catch(MessagingException ex){ Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);}
+        } catch (MessagingException ex) {
+            Logger.getLogger(cEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
-    private  void sendEmail(
+    
+    /** 
+     * Function to send an Email
+     * @param to Recipient's Email address
+     * @param cc Carbon copy Email address
+     * @param from User's UTRGV Email address
+     * @param subject Subject line
+     * @param textMessage Email message body
+     * @param username User's UTRGV username/Email address
+     * @param password User's URTGV account password
+     * @param attachment Attachment file path and filename
+     */
+    private void sendEmail(
             String to, 
             String cc, 
             String from, 
@@ -110,19 +132,10 @@ public class cEmail {
 
                 Transport.send(emailMessage);
                 
-               
-                
         } catch (AddressException e) {
                 e.printStackTrace();
-                
-                
         } catch (MessagingException e) {
-            
-                
                 e.printStackTrace();
         }
     }
-    
-    
-    
 }

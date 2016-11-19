@@ -3,15 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg3340emaildemo;
+package pkEmail;
 
-
-
-
-
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,25 +22,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import pkEmail.cEmail;
 
 /**
- *
+ * This JavaFX class is here to simply demonstrate and exemplify the usage of cEmail.
  * @author Jessie Reyna
  */
 public class Main extends Application {
@@ -123,28 +101,12 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {            
     
-            
-                
-                
-                
                 String mailSmtpHost = "smtp.office365.com";
                 String Port = "587";
-                cEmail  EM = new cEmail(
-                        tfMailTo.getText(), 
-                        "Jessie_Reyna@live.com; the_57flip@yahoo.com", 
-                        "Jesse.Reyna01@utrgv.edu", 
-                        "MyMail",
-                        "HELLO",
-                        "Jesse.Reyna01@utrgv.edu",
-                        pwBox.getText(),                         
-                        "MYPDF.pdf");
+                cEmail  EM = new cEmail(userTextField.getText(),userTextField.getText(),
+                tfMailTo.getText(),tfSubject.getText(),tfTexArea.getText(),userTextField.getText(),
+                pwBox.getText(),"MYPDF.pdf");
 		
-		
-		
-		
-		
-
-               
             }
         });
         
@@ -167,78 +129,4 @@ public class Main extends Application {
         launch(args);
     }
     
-//    public static void sendEmail(
-//            String to, 
-//            String cc, 
-//            String from, 
-//            String subject, 
-//            String text, 
-//            String smtpHost, 
-//            String username, 
-//            String password, 
-//            String port, 
-//            Label output
-//    ) throws MessagingException 
-//    {
-//        try {
-//                Properties props = new Properties();
-//                props.put("mail.smtp.auth", "true");
-//		props.put("mail.smtp.starttls.enable", "true");
-//		props.put("mail.smtp.host", smtpHost);
-//		props.put("mail.smtp.port", "25");
-//                
-//                Session session = Session.getInstance(props,
-//		  new javax.mail.Authenticator() {
-//                      
-//			protected PasswordAuthentication getPasswordAuthentication() {
-//				return new PasswordAuthentication(username, password);
-//			}
-//		  });
-//
-//                Message emailMessage = new MimeMessage(session);
-//                emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-//                emailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
-//                emailMessage.setFrom(new InternetAddress(from));
-//                emailMessage.setSubject(subject);
-//                emailMessage.setText(text);
-//                
-//                BodyPart messageBodyPart = new MimeBodyPart();
-//
-//                messageBodyPart.setText(text);
-//
-//                Multipart multipart = new MimeMultipart();
-//
-//                multipart.addBodyPart(messageBodyPart);
-//
-//                messageBodyPart = new MimeBodyPart();
-//
-//                DataSource source = new FileDataSource("MYPDF.pdf");
-//                
-//                messageBodyPart.setDataHandler(new DataHandler(source));
-//                
-//                messageBodyPart.setFileName("MYPDF.pdf");
-//                multipart.addBodyPart(messageBodyPart);
-//                 
-//                emailMessage.setContent(multipart); 
-//                 
-//                 
-//                 
-//                 
-//                session.setDebug(true);
-//
-//                Transport.send(emailMessage);
-//                
-//                output.setText("EMAIL SENT");
-//                
-//        } catch (AddressException e) {
-//                e.printStackTrace();
-//                
-//                output.setText("EMAIL FAILED");
-//        } catch (MessagingException e) {
-//            
-//                output.setText("EMAIL FAILED");
-//                e.printStackTrace();
-//        }
-//    }
-
 }
